@@ -1226,6 +1226,7 @@ dependencies = [
  "rocket_codegen",
  "rocket_http",
  "serde",
+ "serde_json",
  "state",
  "tempfile",
  "time 0.2.27",
@@ -1422,6 +1423,7 @@ version = "0.1.0"
 dependencies = [
  "mongodb",
  "rocket",
+ "serde",
 ]
 
 [[package]]
