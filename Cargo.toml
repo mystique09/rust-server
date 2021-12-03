@@ -7,6 +7,11 @@ edition = "2021"
 
 [dependencies]
 mongodb = "2.1.0-beta"
+rocket_contrib = { version = "0.4.10", features = ["helmet", "uuid"] }
+uuid = { version = "0.8.2", features = ["serde", "v4"] }
+rand = "0.8.4"
+rust-argon2 = "0.8.3"
+chrono = { version = "0.4.19", features = ["serde"] }
 
 [dependencies.rocket]
 version = "0.5.0-rc.1"
