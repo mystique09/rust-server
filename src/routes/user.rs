@@ -8,6 +8,7 @@ use crate::serde::{
   Serialize,
   Deserialize
 };
+use rocket::serde::uuid::Uuid;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Data {
@@ -53,4 +54,19 @@ pub fn all_user() -> &'static str {
 pub fn new_user(user: &str) -> &'static str {
   println!("User Data: {}", &user);
   "Add new user"
+}
+
+#[get("/<id>")]
+pub fn info_user(id: Uuid) -> Json<Data> {
+  Json(Data::ok(&* format!("Info for user {}", id)))
+}
+
+#[put("/<id>")]
+pub fn update_user(id: Uuid) -> Json<Data> {
+  Json(Data::ok(&* format!("Update info for user {}", id)))
+}
+
+#[delete("/<id>")]
+pub fn delete_user(id: Uuid) -> Json<Data> {
+  Json(Data::ok(&* format!("Delete user with id {}", id)))
 }
