@@ -8,14 +8,17 @@ edition = "2021"
 [dependencies]
 mongodb = "2.1.0-beta"
 uuid = { version = "0.8.2", features = ["serde", "v4"] }
-rand = "0.8.4"
-rust-argon2 = "0.8.3"
 chrono = { version = "0.4.19", features = ["serde"] }
+jwt = "0.15.0"
+bcrypt = "0.10.1"
 
 [dependencies.rocket]
 version = "0.5.0-rc.1"
-features = ["json"]
+features = ["json", "uuid", "secrets"]
 
 [dependencies.serde]
 version = "1.0.130"
 features = ["derive"]
+
+[dev-dependencies]
+lazy_static = "1.4.0"
