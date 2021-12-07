@@ -1,6 +1,7 @@
 use rocket::local::blocking::Client;
 use rocket::http::Status;
 use server::rocket_launcher;
+use lazy_static;
 
 #[test]
 fn user_test() {
