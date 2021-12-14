@@ -78,7 +78,3 @@ impl ResponseUser {
         }
     }
 }
-
-pub trait UserTrait {
-    fn find_by_id(id: &str) -> User;
-}
