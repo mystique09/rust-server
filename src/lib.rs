@@ -1,8 +1,10 @@
+use diesel::pg::PgConnection;
 use rocket::*;
-
 mod models;
-mod routes;
-use routes::{index_route, message, user};
+use models::*;
+pub mod routes;
+
+use routes::{index_route, message as message_route, user as user_route};
 
 pub fn rocket_launcher() -> Rocket<Build> {
     rocket::build()
@@ -10,16 +12,20 @@ pub fn rocket_launcher() -> Rocket<Build> {
         .mount(
             "/user",
             routes![
-                user::index,
-                user::all_user,
-                user::new_user,
-                user::info_user,
-                user::update_user,
-                user::delete_user,
+                user_route::index,
+                user_route::all_user,
+                user_route::new_user,
+                user_route::info_user,
+                user_route::update_user,
+                user_route::delete_user,
             ],
         )
         .mount(
             "/message",
-            routes![message::index, message::all_message, message::new_message],
+            routes![
+                message_route::index,
+                message_route::all_message,
+                message_route::new_message
+            ],
         )
 }

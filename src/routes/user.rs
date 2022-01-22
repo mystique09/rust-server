@@ -1,45 +1,10 @@
-use crate::serde::{Deserialize, Serialize};
+use rocket::serde::json::Json;
 use rocket::serde::uuid::Uuid;
 use rocket::*;
-use rocket::{
-    request::Request,
-    response::{self, Responder, Response},
-    serde::json::Json,
-};
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct Data {
-    pub status: String,
-    pub message: String,
-}
-
-impl<'r> Responder<'r, 'static> for Data {
-    fn respond_to(self, _: &'r Request<'_>) -> response::Result<'static> {
-        Response::build()
-            //.raw_header("X-Data-Status", self.status)
-            .ok()
-    }
-}
-
-impl Data {
-    pub fn ok(message: &str) -> Self {
-        Data {
-            status: "Success".to_string(),
-            message: message.to_string(),
-        }
-    }
-
-    pub fn err(message: &str) -> Self {
-        Data {
-            status: "Success".to_string(),
-            message: message.to_string(),
-        }
-    }
-}
 
 #[get("/")]
-pub fn index() -> Json<Data> {
-    Json(Data::ok("Welcome to the User route!"))
+pub fn index() -> Json<&'static str> {
+    Json("Welcome to the User route!")
 }
 
 #[get("/all")]
@@ -54,16 +19,16 @@ pub fn new_user(user: &str) -> &'static str {
 }
 
 #[get("/<id>")]
-pub fn info_user(id: Uuid) -> Json<Data> {
-    Json(Data::ok(&*format!("Info for user {}", id)))
+pub fn info_user(id: Uuid) -> Json<String> {
+    Json(format!("Info for user with id of {}", id))
 }
 
 #[put("/<id>")]
-pub fn update_user(id: Uuid) -> Json<Data> {
-    Json(Data::ok(&*format!("Update info for user {}", id)))
+pub fn update_user(id: Uuid) -> Json<String> {
+    Json(format!("Update info for user with id of {}", id))
 }
 
 #[delete("/<id>")]
-pub fn delete_user(id: Uuid) -> Json<Data> {
-    Json(Data::ok(&*format!("Delete user with id {}", id)))
+pub fn delete_user(id: Uuid) -> Json<String> {
+    Json(format!("Delete user with id of {}", id))
 }

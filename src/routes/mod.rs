@@ -1,5 +1,4 @@
 use rocket::*;
-
 pub mod message;
 pub mod user;
 
