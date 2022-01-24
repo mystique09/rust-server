@@ -1,25 +1,20 @@
+use chrono::{DateTime, Utc};
+use diesel::{Insertable, Queryable};
+use uuid::Uuid;
 
+#[derive(Queryable)]
 pub struct User {
-    username: String,
-    password: String,
-    role: String
+    pub id: Uuid,
+    pub username: String,
+    pub password: String,
+    pub email: String,
+    pub created: DateTime<Utc>,
+    pub updated: DateTime<Utc>,
 }
 
-impl User {
-    pub fn new(username: String, password: String) -> User{
-        User {
-            username: username,
-            password: password,
-            role: String::from("Normal")
-        }
-    }
-}
-
-pub struct CreateUser {
-    username: String,
-    password: String
-}
-
-pub trait UserTrait {
-    fn find_by_id(id: &str) -> User;
+#[derive(Insertable)]
+pub struct NewUser {
+    pub username: String,
+    pub password: String,
+    pub email: String,
 }
